@@ -1,0 +1,3 @@
+[submodule "python/python-gearman"]
+	path = python/python-gearman
+	url = git@github.com:p-alik/python-gearman.git
