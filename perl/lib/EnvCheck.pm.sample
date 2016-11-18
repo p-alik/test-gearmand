@@ -1,0 +1,25 @@
+package EnvCheck;
+use strict;
+use warnings;
+use File::Spec;
+
+BEGIN {
+    use IO::Socket::SSL ();
+    if (defined($ENV{SSL_DEBUG})) {
+        $IO::Socket::SSL::DEBUG = $ENV{SSL_DEBUG};
+    }
+} ## end BEGIN
+
+our $SSL_CB = sub {
+    my ($hr) = @_;
+    my $dir = "CA-DIR";
+    $hr->{SSL_verify_mode} = IO::Socket::SSL::SSL_VERIFY_PEER;
+    $hr->{SSL_ca_file} = File::Spec->catfile($dir, "ca-chain.cert.pem");
+    $hr->{SSL_cert_file} = File::Spec->catfile($dir, "gearman-client.cert.pem");
+    $hr->{SSL_key_file} = File::Spec->catfile($dir, "gearman-client.key.pem");
+
+    return $hr;
+};    ## end sub ssl_cb
+
+1;
+
