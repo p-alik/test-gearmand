@@ -1,3 +1,6 @@
 [submodule "python/python-gearman"]
 	path = python/python-gearman
 	url = git@github.com:p-alik/python-gearman.git
+[submodule "perl/perl-gearman"]
+	path = perl/perl-gearman
+	url = git@github.com:p-alik/perl-Gearman.git
