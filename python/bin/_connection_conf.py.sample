@@ -19,10 +19,13 @@ class ConnectionConf:
         return [':'.join([self.host, self.port])]
 
     def _ssl_host_list(self):
-        dir = "/home/palik/workspace/Gearman/python-gearman"
+    """
+    setup your SSL configuration here
+    """
+        dir = "CA-DIR"
         keyfile = os.path.join(
-            dir, "ca/intermediate/private/gearman-client.open.key.pem")
+            dir, "gearman-client.key.pem")
         certfile = os.path.join(
-            dir, "ca/intermediate/certs/gearman-client.cert.pem")
-        cafile = os.path.join(dir,  "ca/intermediate/certs/ca-chain.cert.pem")
+            dir, "gearman-client.cert.pem")
+        cafile = os.path.join(dir,  "ca-chain.cert.pem")
         return [{"host": self.host, "port": int(self.port), "keyfile": keyfile, "certfile": certfile, "ca_certs": cafile}]
