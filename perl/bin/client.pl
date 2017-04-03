@@ -19,9 +19,7 @@ $iteration ||= 0;
 $start     ||= 0;
 $timeout   ||= 0;
 
-my %args = (
-    job_servers => [(join ':', $host, $port)]
-);
+my %args = (job_servers => [(join ':', $host, $port)]);
 
 if ($use_ssl) {
     $args{use_ssl}       = 1;
@@ -42,7 +40,7 @@ if ($use_ssl) {
 
         my $r = $client->do_task($func => $i);
 
-        my $v = length(${$r});
+        my $v = ref($r) ? length(${$r}) : 0;
         $v == $i || die "$func result of length $v != $i";
     } ## end for ($start .. $max)
 
